@@ -75,7 +75,9 @@ function AddFilmForm() {
       .post(newFilm)
       .then(
         (response) => {
-          navigate("/");
+          if (response.status === 201) {
+            navigate("/");
+          }
         },
         (error) => {
           setError(error.response.data);
@@ -184,7 +186,7 @@ function AddFilmForm() {
       </Dialog>
       <Snackbar
         open={openSnack}
-        autoHideDuration={5000}
+        autoHideDuration={3000}
         onClose={handleCloseSnack}
       >
         <Alert severity="success" sx={{ width: "100%" }}>

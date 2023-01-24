@@ -3,9 +3,14 @@ import { API, ENDPOINTS } from "../../api";
 
 export const DeleteFilmDialog = (props) => {
   const deleteHandler = () => {
-    API(ENDPOINTS.films).delete(props.filmId);
-    props.setOpen(false);
-    props.setReload(true);
+    API(ENDPOINTS.films)
+      .delete(props.filmId)
+      .then((response) => {
+        if (response.status === 204) {
+          props.setOpen(false);
+          props.setReload(true);
+        }
+      });
   };
   return (
     <div className="p-3 text-center">
