@@ -67,9 +67,14 @@ export const EditFilmDialog = (props) => {
       categoryId: category,
       directorId: director,
     };
-    API(ENDPOINTS.films).put(props.filmId, newFilm);
-    props.setOpen(false);
-    props.setReload(true);
+    API(ENDPOINTS.films)
+      .put(props.filmId, newFilm)
+      .then((response) => {
+        if (response.status === 204) {
+          props.setOpen(false);
+          props.setReload(true);
+        }
+      });
   };
 
   return (

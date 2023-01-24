@@ -1,8 +1,10 @@
 import {
+  Alert,
   FormControl,
   InputLabel,
   MenuItem,
   Select,
+  Snackbar,
   TextField,
 } from "@mui/material";
 import { useEffect, useState } from "react";
@@ -19,6 +21,7 @@ function AllFilmsPage() {
   const [director, setDirector] = useState("");
   const [search, setSearch] = useState("");
   const [reload, setReload] = useState(false);
+  const [openSnack, setOpenSnack] = useState(false);
 
   useEffect(() => {
     API(ENDPOINTS.films)
@@ -70,6 +73,9 @@ function AllFilmsPage() {
         }
         setLoadedDirectors(directors);
       });
+    if (reload) {
+      setOpenSnack(true);
+    }
     setReload(false);
   }, [reload]);
 
@@ -91,6 +97,10 @@ function AllFilmsPage() {
     }
     setListOfFilms(films);
   }, [loadedFilms, search, category, director]);
+
+  const handleCloseSnack = () => {
+    setOpenSnack(false);
+  };
 
   return (
     <Layout>
@@ -146,6 +156,15 @@ function AllFilmsPage() {
           </div>
         </div>
       </div>
+      <Snackbar
+        open={openSnack}
+        autoHideDuration={3000}
+        onClose={handleCloseSnack}
+      >
+        <Alert severity="success" sx={{ width: "100%" }}>
+          Operacja przebiegła pomyślnie!
+        </Alert>
+      </Snackbar>
     </Layout>
   );
 }
