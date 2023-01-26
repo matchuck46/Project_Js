@@ -1,12 +1,6 @@
-import { useEffect, useState } from "react";
 import FilmItem from "./FilmItem";
 
 function FilmList(props) {
-  const [reload, setReload] = useState(false);
-  useEffect(() => {
-    props.setReload(reload);
-    setReload(false);
-  }, [props, reload]);
   return (
     <ul style={{ listStyle: "none" }}>
       {props.films.map((film) => (
@@ -19,7 +13,7 @@ function FilmList(props) {
           name={film.name}
           director={film.director}
           category={film.category}
-          setReload={setReload}
+          setReload={props.setReload}
         />
       ))}
     </ul>

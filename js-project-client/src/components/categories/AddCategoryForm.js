@@ -9,9 +9,14 @@ export const AddCategoryForm = ({ handleCloseCategory, handleOpenSnack }) => {
     const newCategory = {
       name: name,
     };
-    API(ENDPOINTS.categories).post(newCategory);
-    handleCloseCategory();
-    handleOpenSnack();
+    API(ENDPOINTS.categories)
+      .post(newCategory)
+      .then((response) => {
+        if (response.status === 201) {
+          handleCloseCategory();
+          handleOpenSnack();
+        }
+      });
   };
   return (
     <div className="p-3">

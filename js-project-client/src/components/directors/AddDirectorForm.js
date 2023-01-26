@@ -11,9 +11,14 @@ export const AddDirectorForm = ({ handleCloseDirector, handleOpenSnack }) => {
       firstName: firstName,
       lastName: lastName,
     };
-    API(ENDPOINTS.directors).post(newDirector);
-    handleCloseDirector();
-    handleOpenSnack();
+    API(ENDPOINTS.directors)
+      .post(newDirector)
+      .then((response) => {
+        if (response.status === 201) {
+          handleCloseDirector();
+          handleOpenSnack();
+        }
+      });
   };
   return (
     <div className="p-3">

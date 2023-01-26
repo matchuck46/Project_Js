@@ -1,19 +1,13 @@
 import ClearIcon from "@mui/icons-material/Clear";
 import EditIcon from "@mui/icons-material/Edit";
 import { Button, Dialog } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { DeleteFilmDialog } from "./DeleteFilm";
 import { EditFilmDialog } from "./EditFilm";
 
 function FilmItem(props) {
   const [openDelete, setOpenDelete] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
-  const [reload, setReload] = useState(false);
-
-  useEffect(() => {
-    props.setReload(reload);
-    setReload(false);
-  }, [props, reload]);
 
   return (
     <li>
@@ -33,7 +27,7 @@ function FilmItem(props) {
         <Dialog open={openDelete} onClose={() => setOpenDelete(false)}>
           <DeleteFilmDialog
             setOpen={setOpenDelete}
-            setReload={setReload}
+            setReload={props.setReload}
             filmId={props.filmId}
             name={props.name}
           />
@@ -41,7 +35,7 @@ function FilmItem(props) {
         <Dialog open={openEdit} onClose={() => setOpenEdit(false)}>
           <EditFilmDialog
             setOpen={setOpenEdit}
-            setReload={setReload}
+            setReload={props.setReload}
             filmId={props.filmId}
             name={props.name}
             description={props.description}
