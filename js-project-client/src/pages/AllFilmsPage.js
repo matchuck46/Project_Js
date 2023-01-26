@@ -27,6 +27,7 @@ function AllFilmsPage() {
     API(ENDPOINTS.films)
       .getAll()
       .then((response) => {
+        console.log(response);
         return response.data;
       })
       .then((data) => {
@@ -38,6 +39,7 @@ function AllFilmsPage() {
           };
           films.push(film);
         }
+        console.log(films);
         setLoadedFilms(films);
         setListOfFilms(films);
       });
